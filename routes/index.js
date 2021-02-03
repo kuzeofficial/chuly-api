@@ -4,6 +4,7 @@ const express = require('express')
 const userCtrl = require('../controllers/user')
 const Teachers = require('../controllers/teachers')
 const Teacher = require('../models/teacher')
+const Courses = require('../controllers/courses')
 const api = express.Router()
 
 api.post('/signup', userCtrl.signUp)
@@ -15,6 +16,15 @@ api.get('/teachers', (req, res) =>  {
         if (!Teachers) return res.status(404).send({message: 'No hay profesores'})
         
         res.status(200).send(Teachers)
+    })
+})
+api.post('/courses', Courses.Courses)
+api.get('/courses', (req, res) =>  {
+    Teacher.find({}, (err, Courses) => {
+        if (err) return res.status(500).send({message: 'Error al realizar la peticion'})
+        if (!Courses) return res.status(404).send({message: 'No hay cursos'})
+        
+        res.status(200).send(Courses)
     })
 })
 module.exports = api
