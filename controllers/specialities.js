@@ -6,6 +6,7 @@ function Specialities (req, res) {
   const specialities = new especialidad({
     title: req.body.title,
     subtitle: req.body.subtitle,
+    photo: req.body.photo,
   })
 
   specialities.save((err) => {
