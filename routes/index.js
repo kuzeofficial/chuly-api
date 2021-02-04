@@ -8,6 +8,8 @@ const Teacher = require('../models/teacher')
 const Course = require ('../models/course')
 const Specialities = require('../controllers/specialities')
 const Speciality = require('../models/speciality')
+const Posts = require('../controllers/posts')
+const Post = require('../models/post')
 const api = express.Router()
 
 api.post('/signup', userCtrl.signUp)
@@ -37,6 +39,15 @@ api.get('/specialities', (req, res) =>  {
         if (!Specialities) return res.status(404).send({message: 'No hay cursos'})
         
         res.status(200).send(Specialities)
+    })
+})
+api.post('/posts', Posts.Posts)
+api.get('/posts', (req, res) =>  {
+    Post.find({}, (err, Posts) => {
+        if (err) return res.status(500).send({message: 'Error al realizar la peticion'})
+        if (!Posts) return res.status(404).send({message: 'No hay posts'})
+        
+        res.status(200).send(Posts)
     })
 })
 module.exports = api
